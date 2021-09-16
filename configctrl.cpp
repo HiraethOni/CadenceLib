@@ -1,11 +1,13 @@
 #include "configctrl.h"
 #include <QDir>
+#include <QDebug>
 #include <QFile>
 #include <QTextStream>
 #include <QSettings>
 
 configCtrl::configCtrl()
 {
+    qDebug()<<"Class configCtrl Init";
     this->createConfigFile();
 }
 
@@ -41,4 +43,22 @@ bool configCtrl::createConfigFile()
     }
     file.close();
     return true;
+}
+
+QString configCtrl::readInit(QString group, QString key) {
+    QString value = "";
+    if(group.isEmpty()||key.isEmpty()) return value;
+    QSettings config(this->initFilePath, QSettings::IniFormat);
+    value = config.value(group+"/"+key).toString();
+    qDebug()<<group<<key<<value;
+    return value;
+}
+
+QStringList configDatabase::readDatabase() {
+    QStringList res;
+    res << readInit("mariadb", "host");
+    res << readInit("mariadb", "username");
+    res << readInit("mariadb", "passwd");
+    res << readInit("mariadb", "datasheet");
+    return res;
 }

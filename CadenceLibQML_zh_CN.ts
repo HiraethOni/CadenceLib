@@ -5,7 +5,7 @@
     <name>main</name>
     <message>
         <location filename="main.qml" line="8"/>
-        <source>Hello World</source>
+        <source>CadenceLib</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

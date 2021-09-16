@@ -10,6 +10,7 @@ public:
 
     bool writeInit(QString group, QString key, QString value);
     bool readInit(QString group, QString key, QString &value);
+    QString readInit(QString group, QString key);
 
 private:
     QString initFilePath = "./config.ini";
@@ -24,6 +25,12 @@ datasheet=datasheet
 language=zh_CN
 [Allegro Footprints]
 path=X:\\ProgramData\\Cadence\\Cadence_Lib\\Library\\Package)";
+};
+
+class configDatabase : private configCtrl
+{
+public:
+    QStringList readDatabase();
 };
 
 #endif // CONFIGCTRL_H

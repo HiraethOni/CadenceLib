@@ -19,6 +19,8 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    configCtrl conf;
+//    configCtrl conf;
+    configDatabase confdb;
+    QStringList tmep = confdb.readDatabase();
     return app.exec();
 }
