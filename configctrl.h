@@ -1,6 +1,7 @@
 #ifndef CONFIGCTRL_H
 #define CONFIGCTRL_H
 #include <QString>
+#include <QStringList>
 
 
 class configCtrl
@@ -31,6 +32,10 @@ class configDatabase : private configCtrl
 {
 public:
     QStringList readDatabase();
+    void writeDatabase(QStringList &str_list);
+private:
+    QStringList db_conf_key_list = {"host", "username", "passwd", "datasheet"};
+    QString db_conf_group = "mariadb";
 };
 
 #endif // CONFIGCTRL_H

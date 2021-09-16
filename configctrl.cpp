@@ -56,9 +56,14 @@ QString configCtrl::readInit(QString group, QString key) {
 
 QStringList configDatabase::readDatabase() {
     QStringList res;
-    res << readInit("mariadb", "host");
-    res << readInit("mariadb", "username");
-    res << readInit("mariadb", "passwd");
-    res << readInit("mariadb", "datasheet");
+    for(int i = 0; i < db_conf_key_list.count(); i++){
+        res << readInit(db_conf_group, db_conf_key_list[i]);
+    }
     return res;
+}
+
+void configDatabase::writeDatabase(QStringList &str_list) {
+    for(int i = 0; i < db_conf_key_list.count(); i++){
+        writeInit(db_conf_group, db_conf_key_list[i], str_list[i]);
+    }
 }
