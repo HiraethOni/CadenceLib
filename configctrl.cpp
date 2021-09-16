@@ -1,14 +1,18 @@
 #include "configctrl.h"
 #include <QDir>
 #include <QDebug>
-#include <QFile>
+#include <QFileInfo>
 #include <QTextStream>
 #include <QSettings>
 
 configCtrl::configCtrl()
 {
+    QFileInfo fileInfo(this->initFilePath);
+    if(!fileInfo.isFile()) {
+        qDebug()<<"Config file not exist!";
+        this->createConfigFile();
+    }
     qDebug()<<"Class configCtrl Init";
-    this->createConfigFile();
 }
 
 bool configCtrl::writeInit(QString group, QString key, QString value)
