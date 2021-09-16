@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "configctrl.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,5 +19,6 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
+    configCtrl conf;
     return app.exec();
 }
