@@ -13,10 +13,10 @@ bool databaseCtrl::connectDB() {
 
     db = QSqlDatabase::addDatabase("QODBC");
     db.setHostName(db_info[0]);
-    db.setPort(3306);
     db.setUserName(db_info[1]);
     db.setPassword(db_info[2]);
-    db.setDatabaseName(db_info[3]);
+    db.setPort(db_info[3].toInt());
+    db.setDatabaseName(db_info[4]);
     bool status = db.open();
     if (status){
         qDebug()<<"Database opened successfully";

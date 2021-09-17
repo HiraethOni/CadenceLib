@@ -47,7 +47,8 @@ private:
 host=localhost
 username=username
 passwd=passwd
-datasheet=datasheet
+port=3306
+database_name=databaseName
 [language]
 language=zh_CN
 [Allegro Footprints]
@@ -71,7 +72,7 @@ public:
      */
     void writeDatabase(QStringList &str_list);
 private:
-    QStringList db_conf_key_list = {"host", "username", "passwd", "datasheet"};
+    QStringList db_conf_key_list = {"host", "username", "passwd", "port", "database_name"};
     QString db_conf_group = "mariadb";
 };
 
