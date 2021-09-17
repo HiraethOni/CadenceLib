@@ -3,6 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import Qt.labs.qmlmodels 1.0
 import com.hmqs.sqlqml 1.0
+import com.hmqs.tablemodel 1.0
 
 Window {
     width: 640
@@ -45,24 +46,11 @@ Window {
         anchors.right: parent.right
         anchors.top: add_btn.bottom
         anchors.bottom: parent.bottom
-        anchors.topMargin: 0
-        width: parent.width
-        model: TableModel {
-            TableModelColumn {
-                display: "name"
-            }
-            TableModelColumn {
-                display: "color"
-            }
+        columnSpacing: 1
+        rowSpacing: 1
+        clip: true
 
-            rows: [{
-                    "name": "cat",
-                    "color": "black"
-                }, {
-                    "name": "dog",
-                    "color": "brown"
-                }]
-        }
+        model: TableModel{}
 
         delegate: Rectangle {
             border.width: 1

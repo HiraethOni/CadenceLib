@@ -36,6 +36,7 @@ set(PROJECT_SOURCES
         configctrl.cpp
         databasectrl.cpp
         databasectrl.h
+        datademo.h
         ${TS_FILES}
 )
 
