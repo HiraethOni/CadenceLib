@@ -4,8 +4,28 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="main.qml" line="8"/>
+        <location filename="main.qml" line="10"/>
         <source>CadenceLib</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="18"/>
+        <source>Add Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="24"/>
+        <source>Delete Itmes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="32"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="76"/>
+        <source>Save Changes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
