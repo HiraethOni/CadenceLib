@@ -9,22 +9,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="19"/>
+        <location filename="main.qml" line="22"/>
         <source>Add Items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="25"/>
+        <location filename="main.qml" line="28"/>
         <source>Delete Itmes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="33"/>
+        <location filename="main.qml" line="36"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="75"/>
+        <location filename="main.qml" line="78"/>
         <source>Save Changes</source>
         <translation type="unfinished"></translation>
     </message>

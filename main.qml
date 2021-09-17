@@ -10,6 +10,9 @@ Window {
     visible: true
     title: qsTr("CadenceLib")
     id: root
+    DatabaseCtrl{
+        id:dbc;
+    }
 
     NumberAnimation {
         id: numberAnimation
@@ -89,19 +92,6 @@ Window {
         anchors.top: parent.top
         anchors.leftMargin: 0
         anchors.topMargin: 0
-        model: ListModel {
-            ListElement {
-                key: "First"
-                value: 123
-            }
-            ListElement {
-                key: "Second"
-                value: 456
-            }
-            ListElement {
-                key: "Third"
-                value: 789
-            }
-        }
+        model: dbc.getAllTablesNames()
     }
 }
