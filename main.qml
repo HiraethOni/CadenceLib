@@ -40,6 +40,17 @@ Window {
         anchors.leftMargin: 0
     }
 
+    Component{
+        id:tableview_delegate
+        Item{
+            id:wrapper;
+            Column{
+                Text{text:display}
+                Button{text:display}
+            }
+        }
+    }
+
     TableView {
         id: tableView
         anchors.left: parent.left
@@ -52,14 +63,7 @@ Window {
 
         model: TableModel{}
 
-        delegate: Rectangle {
-            border.width: 1
-
-            Text {
-                text: display
-                anchors.centerIn: parent
-            }
-        }
+        delegate: tableview_delegate
     }
     Button {
         id: save_btn
@@ -70,7 +74,6 @@ Window {
         anchors.topMargin: 0
 
         onClicked: {
-//            databaseCtrl.getAllTablesNames()
         }
     }
 

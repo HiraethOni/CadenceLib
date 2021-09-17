@@ -2,6 +2,7 @@
 #include "configctrl.h"
 #include <QDebug>
 
+QSqlDatabase databaseCtrl::db = QSqlDatabase::addDatabase("QODBC");
 databaseCtrl::databaseCtrl(QObject *parent) : QObject(parent)
 {
     this->connectDB();
@@ -11,7 +12,6 @@ bool databaseCtrl::connectDB() {
     configDatabase conf_db;
     QStringList db_info = conf_db.readDatabase();
 
-    db = QSqlDatabase::addDatabase("QODBC");
     db.setHostName(db_info[0]);
     db.setUserName(db_info[1]);
     db.setPassword(db_info[2]);

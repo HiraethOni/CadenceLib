@@ -9,7 +9,7 @@ class databaseCtrl : public QObject
 public:
     explicit databaseCtrl(QObject *parent=nullptr);
     Q_INVOKABLE QStringList getAllTablesNames() const;
-    QSqlDatabase db;
+    static QSqlDatabase db;
 private:
     bool connectDB();
 };
