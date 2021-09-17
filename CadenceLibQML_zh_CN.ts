@@ -24,7 +24,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="76"/>
+        <location filename="main.qml" line="74"/>
         <source>Save Changes</source>
         <translation type="unfinished"></translation>
     </message>

@@ -34,6 +34,8 @@ set(PROJECT_SOURCES
         qml.qrc
         configctrl.h
         configctrl.cpp
+        databasectrl.cpp
+        databasectrl.h
         ${TS_FILES}
 )
 

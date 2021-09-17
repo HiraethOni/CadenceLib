@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "configctrl.h"
+#include "databaseCtrl.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
     engine.load(url);
 
 //    configCtrl conf;
-    configDatabase confdb;
-    QStringList tmep = confdb.readDatabase();
+    databaseCtrl dbc;
+    qDebug()<<dbc.getAllTablesNames();
     return app.exec();
 }
