@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import Qt.labs.qmlmodels 1.0
+import com.hmqs.sqlqml 1.0
 
 Window {
     width: 640
@@ -76,5 +77,31 @@ Window {
         anchors.top: parent.top
         anchors.leftMargin: 0
         anchors.topMargin: 0
+
+        onClicked: {
+//            databaseCtrl.getAllTablesNames()
+        }
+    }
+
+    ComboBox {
+        id: tables_box
+        anchors.left: save_btn.right
+        anchors.top: parent.top
+        anchors.leftMargin: 0
+        anchors.topMargin: 0
+        model: ListModel {
+            ListElement {
+                key: "First"
+                value: 123
+            }
+            ListElement {
+                key: "Second"
+                value: 456
+            }
+            ListElement {
+                key: "Third"
+                value: 789
+            }
+        }
     }
 }

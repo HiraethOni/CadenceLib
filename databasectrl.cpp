@@ -1,8 +1,8 @@
 #include "databasectrl.h"
 #include "configctrl.h"
-#include <qDebug>
+#include <QDebug>
 
-databaseCtrl::databaseCtrl()
+databaseCtrl::databaseCtrl(QObject *parent) : QObject(parent)
 {
     this->connectDB();
 }

@@ -1,7 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "configctrl.h"
-#include "databaseCtrl.h"
+#include "databasectrl.h"
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    qmlRegisterType<databaseCtrl>("com.hmqs.sqlqml",1,0,"DatabaseCtrl");
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -20,8 +23,5 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-//    configCtrl conf;
-    databaseCtrl dbc;
-    qDebug()<<dbc.getAllTablesNames();
     return app.exec();
 }

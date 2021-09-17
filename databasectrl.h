@@ -1,12 +1,14 @@
 #ifndef DATABASECTRL_H
 #define DATABASECTRL_H
 #include <QSqlDatabase>
+#include <QObject>
 
-class databaseCtrl
+class databaseCtrl : public QObject
 {
+    Q_OBJECT
 public:
-    databaseCtrl();
-    QStringList getAllTablesNames() const;
+    explicit databaseCtrl(QObject *parent=nullptr);
+    Q_INVOKABLE QStringList getAllTablesNames() const;
     QSqlDatabase db;
 private:
     bool connectDB();
