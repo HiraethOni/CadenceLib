@@ -10,6 +10,7 @@ Window {
     visible: true
     title: qsTr("CadenceLib")
     id: root
+    property var mma: dbc.getAllContent("capacitor")
     DatabaseCtrl{
         id:dbc;
     }
@@ -37,16 +38,8 @@ Window {
         anchors.left: del_btn.right
         anchors.top: parent.top
         anchors.leftMargin: 0
-    }
-
-    Component{
-        id:tableview_delegate
-        Item{
-            id:wrapper;
-            Column{
-                Text{text:display}
-                Button{text:display}
-            }
+        onClicked: {
+            console.log(mma)
         }
     }
 
@@ -58,67 +51,46 @@ Window {
         columnSpacing: 1
         rowSpacing: 1
         width: parent.width
-//        clip: true
-
+        clip: true
         model: TableModel {
-            TableModelColumn {
-                display: "checked"
-            }
-            TableModelColumn {
-                display: "amount"
-            }
-            TableModelColumn {
-                display: "fruitType"
-            }
-            TableModelColumn {
-                display: "fruitName"
-            }
-            TableModelColumn {
-                display: "fruitPrice"
-            }
+            TableModelColumn {display: "ID"}
+            TableModelColumn {display: "Part Number"}
+            TableModelColumn {display: "Description"}
+            TableModelColumn {display: "Part Type"}
+            TableModelColumn {display: "Value"}
+            TableModelColumn {display: "MFG Name"}
+            TableModelColumn {display: "PCB Footprint"}
+            TableModelColumn {display: "Symbol"}
+            TableModelColumn {display: "MFG Part Name"}
+            TableModelColumn {display: "MFG Part Description"}
+            TableModelColumn {display: "RoHS"}
+            TableModelColumn {display: "MFG Part Lifecycle Phase"}
+            TableModelColumn {display: "Datasheet"}
+            TableModelColumn {display: "buy link"}
 
             // Each row is one type of fruit that can be ordered
-            rows: [{
-                    "checked"// Each property is one cell/column.
-                    : false,
-                    "amount": 1,
-                    "fruitType": "Apple",
-                    "fruitName": "Granny Smith",
-                    "fruitPrice": 1.50
-                }, {
-                    "checked": true,
-                    "amount": 4,
-                    "fruitType": "Orange",
-                    "fruitName": "Navel",
-                    "fruitPrice": 2.50
-                }, {
-                    "checked": false,
-                    "amount": 1,
-                    "fruitType": "Banana",
-                    "fruitName": "Cavendish",
-                    "fruitPrice": 3.50
-                }]
+            rows: JSON.parse(mma)
         }
         delegate: DelegateChooser {
-            DelegateChoice {
-                column: 0
-                delegate: CheckBox {
-                    checked: model.display
-                    onToggled: model.display = checked
-                }
-            }
-            DelegateChoice {
-                column: 1
-                delegate: SpinBox {
-                    value: model.display
-                    onValueModified: model.display = value
-                }
-            }
+//            DelegateChoice {
+//                column: 0
+//                delegate: CheckBox {
+//                    checked: model.display
+//                    onToggled: model.display = checked
+//                }
+//            }
+//            DelegateChoice {
+//                column: 1
+//                delegate: SpinBox {
+//                    value: model.display
+//                    onValueModified: model.display = value
+//                }
+//            }
             DelegateChoice {
                 delegate: TextField {
                     text: model.display
                     selectByMouse: true
-                    implicitWidth: 140
+                    implicitWidth: 50
                     onAccepted: model.display = text
                 }
             }
@@ -133,6 +105,7 @@ Window {
         anchors.topMargin: 0
 
         onClicked: {
+            console.log(dbc.getAllContent("capacitor"))
         }
     }
 
