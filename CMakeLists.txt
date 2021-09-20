@@ -60,8 +60,6 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-add_subdirectory("${CMAKE_SOURCE_DIR}/3rdparty/fmtlog")
-
 target_compile_definitions(CadenceLibQML
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(CadenceLibQML
