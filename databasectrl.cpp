@@ -1,6 +1,11 @@
 #include "databasectrl.h"
 #include "configctrl.h"
 #include <QDebug>
+#include <QVariantMap>
+#include <QVariantList>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonArray>
 
 QSqlDatabase databaseCtrl::db = QSqlDatabase::addDatabase("QODBC");
 databaseCtrl::databaseCtrl(QObject *parent) : QObject(parent)
@@ -39,19 +44,25 @@ QString databaseCtrl::getAllContent(const QString tables_name) const {
 
     // 返回的json前面加入一行空行,防止数据库是空的导致前端json解码失败
     // 同时也为了方便前端的表格新建这一功能的实现
-    QStringList table_null_list;
-    foreach (QString item, table_column_name){
-        table_null_list << "\"" + item + "\":\"" + "" + "\"";
+    QVariantList qvarList;
+    QVariantMap tmpVm;
+
+    for (int i = 0; i < table_column_name.count(); i++){
+        tmpVm[table_column_name[i]] = "";
     }
-    str_list<<"{" + table_null_list.join(",") + "}";
+    qvarList<<tmpVm;
     
     while(p_query->next()){
-        QStringList temp_list;
-        temp_list << "\"" + table_column_name[0] + "\":\"" + QString::number(p_query->value(0).toInt()) + "\"";
+        tmpVm.clear();
+        tmpVm[table_column_name[0]] = QString::number(p_query->value(0).toInt());
         for (int i = 1; i < table_column_name.count(); i++){
-            temp_list << "\"" + table_column_name[i] + "\":\"" + p_query->value(i).toString() + "\"";
+            tmpVm[table_column_name[i]] = p_query->value(i).toString();
         }
-        str_list<<"{" + temp_list.join(",") + "}";
+        qvarList<<tmpVm;
     }
-    return "[" + str_list.join(",") + "]";
+
+    QJsonArray jsonArray = QJsonArray::fromVariantList(qvarList);
+    QJsonDocument jsonDoc(jsonArray);
+
+    return jsonDoc.toJson();
 }

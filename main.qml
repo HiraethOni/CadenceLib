@@ -106,7 +106,6 @@ Window {
         onCurrentTextChanged: {
             console.info(currentText)
             db_data = dbc.getAllContent(currentText)
-            console.info(db_data)
         }
     }
 }
