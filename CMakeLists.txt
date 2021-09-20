@@ -37,6 +37,7 @@ set(PROJECT_SOURCES
         databasectrl.cpp
         databasectrl.h
         datademo.h
+        XLogger.h
         ${TS_FILES})
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
