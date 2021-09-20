@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.14.0, 2021-09-18T10:20:04. -->
+<!-- Written by QtCreator 4.14.0, 2021-09-18T18:26:22. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -338,7 +338,6 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">CadenceLibQML</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.CadenceLibQML</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">CadenceLibQML</value>
-    <value type="QString" key="RunConfiguration.Arguments">-qmljsdebugger=port:26666</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

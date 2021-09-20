@@ -5,12 +5,12 @@ import Qt.labs.qmlmodels 1.0
 import com.hmqs.sqlqml 1.0
 
 Window {
-    width: 640
+    width: 720
     height: 480
     visible: true
     title: qsTr("CadenceLib")
     id: root
-    property var mma: dbc.getAllContent("capacitor")
+    property var db_data: dbc.getAllContent("capacitor")
     DatabaseCtrl{
         id:dbc;
     }
@@ -39,7 +39,6 @@ Window {
         anchors.top: parent.top
         anchors.leftMargin: 0
         onClicked: {
-            console.log(mma)
         }
     }
 
@@ -48,10 +47,12 @@ Window {
         anchors.left: parent.left
         anchors.top: add_btn.bottom
         anchors.bottom: parent.bottom
-        columnSpacing: 1
         rowSpacing: 1
-        width: parent.width
+        anchors.right: parent.right
         clip: true
+        columnWidthProvider: function (column) {
+            return tableView.model ? tableView.width/tableView.model.columnCount() : 0
+        }
         model: TableModel {
             TableModelColumn {display: "ID"}
             TableModelColumn {display: "Part Number"}
@@ -68,29 +69,15 @@ Window {
             TableModelColumn {display: "Datasheet"}
             TableModelColumn {display: "buy link"}
 
-            // Each row is one type of fruit that can be ordered
-            rows: JSON.parse(mma)
+            rows: JSON.parse(db_data)
         }
+
         delegate: DelegateChooser {
-//            DelegateChoice {
-//                column: 0
-//                delegate: CheckBox {
-//                    checked: model.display
-//                    onToggled: model.display = checked
-//                }
-//            }
-//            DelegateChoice {
-//                column: 1
-//                delegate: SpinBox {
-//                    value: model.display
-//                    onValueModified: model.display = value
-//                }
-//            }
             DelegateChoice {
                 delegate: TextField {
+                    implicitWidth: 80
                     text: model.display
                     selectByMouse: true
-                    implicitWidth: 50
                     onAccepted: model.display = text
                 }
             }
@@ -105,7 +92,7 @@ Window {
         anchors.topMargin: 0
 
         onClicked: {
-            console.log(dbc.getAllContent("capacitor"))
+            console.info(dbc.getAllContent("capacitor"))
         }
     }
 
@@ -116,5 +103,10 @@ Window {
         anchors.leftMargin: 0
         anchors.topMargin: 0
         model: dbc.getAllTablesNames()
+        onCurrentTextChanged: {
+            console.info(currentText)
+            db_data = dbc.getAllContent(currentText)
+            console.info(db_data)
+        }
     }
 }

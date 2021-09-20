@@ -36,6 +36,15 @@ QStringList databaseCtrl::getAllTablesNames() const {
 QString databaseCtrl::getAllContent(const QString tables_name) const {
     p_query->exec("Select * from "+tables_name);
     QStringList str_list;
+
+    // 返回的json前面加入一行空行,防止数据库是空的导致前端json解码失败
+    // 同时也为了方便前端的表格新建这一功能的实现
+    QStringList table_null_list;
+    foreach (QString item, table_column_name){
+        table_null_list << "\"" + item + "\":\"" + "" + "\"";
+    }
+    str_list<<"{" + table_null_list.join(",") + "}";
+    
     while(p_query->next()){
         QStringList temp_list;
         temp_list << "\"" + table_column_name[0] + "\":\"" + QString::number(p_query->value(0).toInt()) + "\"";
