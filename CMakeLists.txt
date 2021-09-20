@@ -59,6 +59,7 @@ else()
 
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
+include_directories(${PROJECT_SOURCE_DIR}/3rdparty/spdlog/include)
 
 target_compile_definitions(CadenceLibQML
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
