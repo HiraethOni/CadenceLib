@@ -1,14 +1,12 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "configctrl.h"
-#include "spdlog/spdlog.h"
 #include "databasectrl.h"
 #include "datademo.h"
 #include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
-    spdlog::info("heoold");
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif

@@ -37,8 +37,7 @@ set(PROJECT_SOURCES
         databasectrl.cpp
         databasectrl.h
         datademo.h
-        ${TS_FILES}
-)
+        ${TS_FILES})
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(CadenceLibQML
@@ -59,9 +58,11 @@ else()
 
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
-include_directories(${PROJECT_SOURCE_DIR}/3rdparty/spdlog/include)
+
+add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty/spdlog)
+include_directories("${PROJECT_SOURCE_DIR}/3rdparty/spdlog/include")
 
 target_compile_definitions(CadenceLibQML
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(CadenceLibQML
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Sql)
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Sql spdlog)
