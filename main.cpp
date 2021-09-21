@@ -2,7 +2,6 @@
 #include <QQmlApplicationEngine>
 #include "Xlogger.h"
 #include "databasectrl.h"
-#include "datademo.h"
 #include <QQmlContext>
 
 int main(int argc, char *argv[])
@@ -16,7 +15,6 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     qmlRegisterType<databaseCtrl>("com.hmqs.sqlqml",1,0,"DatabaseCtrl");
-    qmlRegisterType<TableModel>("com.hmqs.tablemodel",1,0,"TableModel");
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

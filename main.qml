@@ -73,6 +73,13 @@ Window {
         }
 
         delegate: DelegateChooser {
+//            DelegateChoice {
+//                column: 0
+//                delegate: Label {
+//                    text: model.display
+//                }
+//            }
+
             DelegateChoice {
                 delegate: TextField {
                     implicitWidth: 80
@@ -92,7 +99,7 @@ Window {
         anchors.topMargin: 0
 
         onClicked: {
-            console.info(dbc.getAllContent("capacitor"))
+            console.info(tableView.model.rows)
         }
     }
 

@@ -36,7 +36,6 @@ set(PROJECT_SOURCES
         configctrl.cpp
         databasectrl.cpp
         databasectrl.h
-        datademo.h
         XLogger.h
         ${TS_FILES})
 
