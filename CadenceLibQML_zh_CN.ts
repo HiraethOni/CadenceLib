@@ -23,5 +23,9 @@
         <source>Save Changes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

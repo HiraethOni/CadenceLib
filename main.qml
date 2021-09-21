@@ -50,6 +50,8 @@ Window {
         rowSpacing: 1
         anchors.right: parent.right
         clip: true
+        boundsBehavior: Flickable.StopAtBounds
+
         columnWidthProvider: function (column) {
             return tableView.model ? tableView.width/tableView.model.columnCount() : 0
         }
@@ -73,19 +75,24 @@ Window {
         }
 
         delegate: DelegateChooser {
-//            DelegateChoice {
-//                column: 0
-//                delegate: Label {
-//                    text: model.display
-//                }
-//            }
+            DelegateChoice {
+                column: 0
+//                row: 0
+                delegate: Button{
+                    text: qsTr("Add")
+                    onClicked: {
+                        var currentRow = JSON.stringify(tableView.model.rows[index])
+                        console.log(currentRow)
+                    }
+                }
+            }
 
             DelegateChoice {
                 delegate: TextField {
                     implicitWidth: 80
                     text: model.display
                     selectByMouse: true
-                    onAccepted: model.display = text
+                    onEditingFinished: model.display = text
                 }
             }
         }
@@ -99,7 +106,8 @@ Window {
         anchors.topMargin: 0
 
         onClicked: {
-            console.info(tableView.model.rows)
+            var invert_json = JSON.stringify(tableView.model.rows)
+            console.info(invert_json)
         }
     }
 

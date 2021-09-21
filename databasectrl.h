@@ -36,6 +36,8 @@ public:
      */
     Q_INVOKABLE QString getAllContent(const QString tables_name) const;
 
+//    Q_INVOKABLE void saveChanges(const QString json) const;
+
     /**
      * 数据库指针,这里声明为静态类型是为了方便继承的时候不用再初始化这个指针
      */
