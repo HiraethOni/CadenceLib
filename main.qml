@@ -10,7 +10,7 @@ Window {
     visible: true
     title: qsTr("CadenceLib")
     id: root
-    property var db_data: dbc.getAllContent("capacitor")
+    property var db_data: dbc.GetAllContent("capacitor")
     DatabaseCtrl{
         id:dbc;
     }
@@ -117,10 +117,10 @@ Window {
         anchors.top: parent.top
         anchors.leftMargin: 0
         anchors.topMargin: 0
-        model: dbc.getAllTablesNames()
+        model: dbc.GetAllTablesNames()
         onCurrentTextChanged: {
             console.info(currentText)
-            db_data = dbc.getAllContent(currentText)
+            db_data = dbc.GetAllContent(currentText)
         }
     }
 }

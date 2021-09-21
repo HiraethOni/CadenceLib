@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    qmlRegisterType<databaseCtrl>("com.hmqs.sqlqml",1,0,"DatabaseCtrl");
+    qmlRegisterType<CDatabaseCtrl>("com.hmqs.sqlqml", 1, 0, "DatabaseCtrl");
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

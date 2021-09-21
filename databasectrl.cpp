@@ -7,25 +7,25 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 
-QSqlDatabase databaseCtrl::db = QSqlDatabase::addDatabase("QODBC");
-databaseCtrl::databaseCtrl(QObject *parent) : QObject(parent)
+QSqlDatabase CDatabaseCtrl::sm_db = QSqlDatabase::addDatabase("QODBC");
+CDatabaseCtrl::CDatabaseCtrl(QObject *parent) : QObject(parent)
 {
-    table_column_name<<"ID"<<"Part Number"<<"Description"<<"Part Type"<<"Value"<<"MFG Name"<<"PCB Footprint"<<"Symbol"<<"MFG Part Name"
+    __m_table_column_name << "ID" << "Part Number" << "Description" << "Part Type" << "Value" << "MFG Name" << "PCB Footprint" << "Symbol" << "MFG Part Name"
         <<"MFG Part Description"<<"RoHS"<<"MFG Part Lifecycle Phase"<<"Datasheet"<<"buy link";
-    p_query = new QSqlQuery(db);
-    this->connectDB();
+    __m_p_query = new QSqlQuery(sm_db);
+    this->__bConnectDB();
 }
 
-bool databaseCtrl::connectDB() {
+bool CDatabaseCtrl::__bConnectDB() {
     configDatabase conf_db;
     QStringList db_info = conf_db.readDatabase();
 
-    db.setHostName(db_info[0]);
-    db.setUserName(db_info[1]);
-    db.setPassword(db_info[2]);
-    db.setPort(db_info[3].toInt());
-    db.setDatabaseName(db_info[4]);
-    bool status = db.open();
+    sm_db.setHostName(db_info[0]);
+    sm_db.setUserName(db_info[1]);
+    sm_db.setPassword(db_info[2]);
+    sm_db.setPort(db_info[3].toInt());
+    sm_db.setDatabaseName(db_info[4]);
+    bool status = sm_db.open();
     if (status){
         qDebug()<<"Database opened successfully";
         return true;
@@ -34,12 +34,12 @@ bool databaseCtrl::connectDB() {
     return false;
 }
 
-QStringList databaseCtrl::getAllTablesNames() const {
-    return this->db.tables();
+QStringList CDatabaseCtrl::GetAllTablesNames() const {
+    return this->sm_db.tables();
 }
 
-QString databaseCtrl::getAllContent(const QString tables_name) const {
-    p_query->exec("Select * from "+tables_name);
+QString CDatabaseCtrl::GetAllContent(const QString tables_name) const {
+    __m_p_query->exec("Select * from " + tables_name);
     QStringList str_list;
 
     // 返回的json前面加入一行空行,防止数据库是空的导致前端json解码失败
@@ -47,16 +47,16 @@ QString databaseCtrl::getAllContent(const QString tables_name) const {
     QVariantList qvarList;
     QVariantMap tmpVm;
 
-    for (int i = 0; i < table_column_name.count(); i++){
-        tmpVm[table_column_name[i]] = "";
+    for (int i = 0; i < __m_table_column_name.count(); i++){
+        tmpVm[__m_table_column_name[i]] = "";
     }
     qvarList<<tmpVm;
     
-    while(p_query->next()){
+    while(__m_p_query->next()){
         tmpVm.clear();
-        tmpVm[table_column_name[0]] = QString::number(p_query->value(0).toInt());
-        for (int i = 1; i < table_column_name.count(); i++){
-            tmpVm[table_column_name[i]] = p_query->value(i).toString();
+        tmpVm[__m_table_column_name[0]] = QString::number(__m_p_query->value(0).toInt());
+        for (int i = 1; i < __m_table_column_name.count(); i++){
+            tmpVm[__m_table_column_name[i]] = __m_p_query->value(i).toString();
         }
         qvarList<<tmpVm;
     }
