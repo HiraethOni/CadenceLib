@@ -34,9 +34,9 @@ public:
      * @param tables_name 表名
      * @return 数据库内容(json格式)
      */
-    Q_INVOKABLE [[nodiscard]] QString GetAllContent(const QString tables_name) const;
+    Q_INVOKABLE QString GetAllContent(const QString tables_name) const;
 
-
+    Q_INVOKABLE QStringList ScanPackageDir() const;
 //    Q_INVOKABLE void saveChanges(const QString json) const;
 
     /**

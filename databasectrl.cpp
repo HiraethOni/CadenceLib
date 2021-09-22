@@ -6,6 +6,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QDir>
 
 QSqlDatabase CDatabaseCtrl::sm_db = QSqlDatabase::addDatabase("QODBC");
 CDatabaseCtrl::CDatabaseCtrl(QObject *parent) : QObject(parent)
@@ -65,4 +66,23 @@ QString CDatabaseCtrl::GetAllContent(const QString tables_name) const {
     QJsonDocument jsonDoc(jsonArray);
 
     return jsonDoc.toJson();
+}
+
+QStringList CDatabaseCtrl::ScanPackageDir() const {
+    configCtrl conf;
+    QString packagePath = conf.readInit("Allegro Footprints", "path");
+
+    QDir dir(packagePath);
+    QStringList nameFilters;
+    nameFilters << "*.dra";
+
+    QStringList rawName = dir.entryList(nameFilters, QDir::Files|QDir::Readable, QDir::Name);
+    QStringList fileNameList;
+
+    foreach(QString item, rawName){
+        QStringList str_split = item.split('.');
+        fileNameList.append(str_split[0]);
+    }
+
+    return fileNameList;
 }

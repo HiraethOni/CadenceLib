@@ -88,6 +88,15 @@ Window {
             }
 
             DelegateChoice {
+                column: 6
+                delegate: ComboBox {
+                    editable: true
+                    model: dbc.ScanPackageDir()
+                    Component.onCompleted: currentIndex = indexOfValue(model.display)
+                }
+            }
+
+            DelegateChoice {
                 delegate: TextField {
                     implicitWidth: 80
                     text: model.display
