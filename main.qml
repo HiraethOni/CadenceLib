@@ -10,10 +10,11 @@ Window {
     visible: true
     title: qsTr("CadenceLib")
     id: root
-    property var db_data: dbc.GetAllContent("capacitor")
+
     DatabaseCtrl{
         id:dbc;
     }
+    property var db_data: dbc.getAllContent("capacitor")
 
     NumberAnimation {
         id: numberAnimation
@@ -81,7 +82,7 @@ Window {
                 delegate: Button{
                     text: qsTr("Add")
                     onClicked: {
-                        var currentRow = JSON.stringify(tableView.model.rows[index])
+                        var currentRow = JSON.stringify(tableView.model.rows[index]["Part Type"])
                         console.log(currentRow)
                     }
                 }
@@ -91,8 +92,9 @@ Window {
                 column: 6
                 delegate: ComboBox {
                     editable: true
-                    model: dbc.ScanPackageDir()
-                    Component.onCompleted: currentIndex = indexOfValue(model.display)
+                    model: dbc.scanPackageDir()
+                    Component.onCompleted: console.log(parent.index)
+                    currentIndex: 4
                 }
             }
 
@@ -126,10 +128,10 @@ Window {
         anchors.top: parent.top
         anchors.leftMargin: 0
         anchors.topMargin: 0
-        model: dbc.GetAllTablesNames()
+        model: dbc.getAllTablesNames()
         onCurrentTextChanged: {
             console.info(currentText)
-            db_data = dbc.GetAllContent(currentText)
+            db_data = dbc.getAllContent(currentText)
         }
     }
 }

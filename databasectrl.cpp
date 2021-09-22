@@ -36,11 +36,11 @@ bool CDatabaseCtrl::__ConnectDB() {
     return false;
 }
 
-QStringList CDatabaseCtrl::GetAllTablesNames() const {
+QStringList CDatabaseCtrl::getAllTablesNames() const {
     return this->sm_db.tables();
 }
 
-QString CDatabaseCtrl::GetAllContent(const QString tables_name) const {
+QString CDatabaseCtrl::getAllContent(const QString tables_name) const {
     __m_p_query->exec("Select * from " + tables_name);
     QStringList str_list;
 
@@ -69,7 +69,7 @@ QString CDatabaseCtrl::GetAllContent(const QString tables_name) const {
     return jsonDoc.toJson();
 }
 
-QStringList CDatabaseCtrl::ScanPackageDir() const {
+QStringList CDatabaseCtrl::scanPackageDir() const {
     CConfigCtrl conf;
     QString packagePath = conf.ReadInit("Allegro Footprints", "path");
 

@@ -27,16 +27,20 @@ public:
      * 获取所有表的名字
      * @return 数据库表名
      */
-    Q_INVOKABLE QStringList GetAllTablesNames() const;
+    Q_INVOKABLE QStringList getAllTablesNames() const;
 
     /**
      * 获取数据库所有内容
      * @param tables_name 表名
      * @return 数据库内容(json格式)
      */
-    Q_INVOKABLE QString GetAllContent(const QString tables_name) const;
+    Q_INVOKABLE QString getAllContent(const QString tables_name) const;
 
-    Q_INVOKABLE QStringList ScanPackageDir() const;
+    /**
+     * 扫描封装路径
+     * @return
+     */
+    Q_INVOKABLE QStringList scanPackageDir() const;
 //    Q_INVOKABLE void saveChanges(const QString json) const;
 
     /**

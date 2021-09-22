@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "Xlogger.h"
+#include "XLogger.h"
 #include "databasectrl.h"
 #include <QQmlContext>
 
