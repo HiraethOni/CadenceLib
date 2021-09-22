@@ -15,6 +15,7 @@ Window {
         id:dbc;
     }
     property var db_data: dbc.getAllContent("capacitor")
+    property var packageList: dbc.scanPackageDir()
 
     NumberAnimation {
         id: numberAnimation
@@ -75,10 +76,11 @@ Window {
             rows: JSON.parse(db_data)
         }
 
+        property int aa: 4
         delegate: DelegateChooser {
             DelegateChoice {
                 column: 0
-//                row: 0
+                row: 0
                 delegate: Button{
                     text: qsTr("Add")
                     onClicked: {
@@ -90,13 +92,13 @@ Window {
 
             DelegateChoice {
                 column: 6
+                row: 0
                 delegate: ComboBox {
                     editable: true
-                    model: dbc.scanPackageDir()
-                    Component.onCompleted: console.log(parent.index)
-                    currentIndex: 4
+                    model: packageList
+                    currentIndex: indexOfValue(display)
+                    }
                 }
-            }
 
             DelegateChoice {
                 delegate: TextField {
@@ -108,6 +110,7 @@ Window {
             }
         }
     }
+
     Button {
         id: save_btn
         text: qsTr("Save Changes")
