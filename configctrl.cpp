@@ -1,4 +1,5 @@
 #include "configctrl.h"
+#include "XLogger.h"
 #include <QDir>
 #include <QDebug>
 #include <QFileInfo>
@@ -12,7 +13,7 @@ CConfigCtrl::CConfigCtrl()
         qDebug()<<"Config file not exist!";
         this->__CreateConfigFile();
     }
-    qDebug()<<"Class CConfigCtrl Init";
+    XLOG_DEBUG("Class CConfigCtrl Init");
 }
 
 bool CConfigCtrl::WriteInit(QString group, QString key, QString value)
@@ -54,7 +55,7 @@ QString CConfigCtrl::ReadInit(QString group, QString key) {
     if(group.isEmpty()||key.isEmpty()) return value;
     QSettings config(this->__initFilePath, QSettings::IniFormat);
     value = config.value(group+"/"+key).toString();
-    qDebug()<<group<<key<<value;
+    XLOG_DEBUG("Read Allegro Path");
     return value;
 }
 

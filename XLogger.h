@@ -78,14 +78,18 @@ private:
         const std::string logger_name_prefix = LOG_FILE_NAME;
 
         // decide print to console or log file
-#ifdef Debug
+#ifdef _DEBUG
         bool console = true;
 #else
         bool console = false;
-#endif // DEBUG
+#endif // _DEBUG
 
         // decide the log level
-        std::string level = "debug";
+#ifdef _DEBUG
+        std::string level = "trace";
+#else
+        std::string level = "info";
+#endif // _DEBUG
 
         try
         {
@@ -95,7 +99,8 @@ private:
             const std::string logger_name = logger_name_prefix + std::to_string(date) + "_" + std::to_string(time);
 
             if (console)
-                m_logger = spdlog::stdout_color_st(logger_name); // single thread console output faster
+//                m_logger = spdlog::stdout_color_st(logger_name); // single thread console output faster
+                m_logger = spdlog::stdout_color_mt(logger_name); // single thread console output faster
             else
                 //m_logger = spdlog::create_async<spdlog::sinks::basic_file_sink_mt>(logger_name, log_dir + "/" + logger_name + ".log"); // only one log file
                 m_logger = spdlog::create_async<spdlog::sinks::rotating_file_sink_mt>(logger_name, log_dir + "/" + logger_name + ".log", 500 * 1024 * 1024, 1000); // multi part log files, with every part 500M, max 1000 files
