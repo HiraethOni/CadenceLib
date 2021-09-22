@@ -4,10 +4,10 @@
 #include <QStringList>
 
 
-class configCtrl
+class CConfigCtrl
 {
 public:
-    configCtrl();
+    CConfigCtrl();
 
     /**
      * 配置文件写入函数
@@ -16,7 +16,7 @@ public:
      * @param value 值
      * @return 写入状态
      */
-    bool writeInit(QString group, QString key, QString value);
+    bool WriteInit(QString group, QString key, QString value);
     /**
      * 配置文件读取函数
      * @param group 组名
@@ -24,26 +24,26 @@ public:
      * @param value 读取到的值的存放指针
      * @return 读取状态
      */
-    bool readInit(QString group, QString key, QString &value);
+    bool ReadInit(QString group, QString key, QString &value);
     /**
      * 配置文件读取函数-直接返回读取结果
      * @param group 组名
      * @param key key
      * @return 读取值
      */
-    QString readInit(QString group, QString key);
+    QString ReadInit(QString group, QString key);
 
 private:
-    QString initFilePath = "./config.ini";      // 配置文件所处路径
+    QString __initFilePath = "./config.ini";      // 配置文件所处路径
     /**
      * 检查程序运行目录内是否有配置文件
      * 没有则新建
      * @return
      */
-    bool createConfigFile();
+    bool __CreateConfigFile();
 
     // 默认配置文件,注意路径需要加\转义
-    QString defaultConcig = R"([mariadb]
+    QString __defaultConcig = R"([mariadb]
 host=localhost
 username=username
 passwd=passwd
@@ -58,22 +58,22 @@ path=X:\\ProgramData\\Cadence\\Cadence_Lib\\Library\\Package)";
 /**
  * 专门读取数据库配置文件的派生类
  */
-class configDatabase : private configCtrl
+class CConfigDatabase : private CConfigCtrl
 {
 public:
     /**
      * 读取数据库配置文件
      * @return QStringList
      */
-    QStringList readDatabase();
+    QStringList ReadDatabase();
     /**
      * 写入数据库配置文件
      * @param str_list 待写入的列表
      */
-    void writeDatabase(QStringList &str_list);
+    void WriteDatabase(QStringList &str_list);
 private:
-    QStringList db_conf_key_list = {"host", "username", "passwd", "port", "database_name"};
-    QString db_conf_group = "mariadb";
+    QStringList __db_conf_key_list = {"host", "username", "passwd", "port", "database_name"};
+    QString __db_conf_group = "mariadb";
 };
 
 #endif // CONFIGCTRL_H

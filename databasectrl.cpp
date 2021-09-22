@@ -18,8 +18,8 @@ CDatabaseCtrl::CDatabaseCtrl(QObject *parent) : QObject(parent)
 }
 
 bool CDatabaseCtrl::__bConnectDB() {
-    configDatabase conf_db;
-    QStringList db_info = conf_db.readDatabase();
+    CConfigDatabase conf_db;
+    QStringList db_info = conf_db.ReadDatabase();
 
     sm_db.setHostName(db_info[0]);
     sm_db.setUserName(db_info[1]);
@@ -69,8 +69,8 @@ QString CDatabaseCtrl::GetAllContent(const QString tables_name) const {
 }
 
 QStringList CDatabaseCtrl::ScanPackageDir() const {
-    configCtrl conf;
-    QString packagePath = conf.readInit("Allegro Footprints", "path");
+    CConfigCtrl conf;
+    QString packagePath = conf.ReadInit("Allegro Footprints", "path");
 
     QDir dir(packagePath);
     QStringList nameFilters;
