@@ -44,7 +44,7 @@ public:
      */
     static QSqlDatabase sm_db;
 private:
-    bool __bConnectDB();       // 连接数据库
+    bool __ConnectDB();       // 连接数据库
     QSqlQuery *__m_p_query;     // 数据库查询指针
     QStringList __m_table_column_name;  // 数据库字段名
 };

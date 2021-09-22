@@ -1,5 +1,6 @@
 #include "databasectrl.h"
 #include "configctrl.h"
+#include "XLogger.h"
 #include <QDebug>
 #include <QVariantMap>
 #include <QVariantList>
@@ -14,10 +15,10 @@ CDatabaseCtrl::CDatabaseCtrl(QObject *parent) : QObject(parent)
     __m_table_column_name << "ID" << "Part Number" << "Description" << "Part Type" << "Value" << "MFG Name" << "PCB Footprint" << "Symbol" << "MFG Part Name"
         <<"MFG Part Description"<<"RoHS"<<"MFG Part Lifecycle Phase"<<"Datasheet"<<"buy link";
     __m_p_query = new QSqlQuery(sm_db);
-    this->__bConnectDB();
+    this->__ConnectDB();
 }
 
-bool CDatabaseCtrl::__bConnectDB() {
+bool CDatabaseCtrl::__ConnectDB() {
     CConfigDatabase conf_db;
     QStringList db_info = conf_db.ReadDatabase();
 
@@ -28,10 +29,10 @@ bool CDatabaseCtrl::__bConnectDB() {
     sm_db.setDatabaseName(db_info[4]);
     bool status = sm_db.open();
     if (status){
-        qDebug()<<"Database opened successfully";
+        XLOG_INFO("Database opened successfully");
         return true;
     }
-    qDebug()<<"Database opened failed";
+    XLOG_WARN("Database opened failed");
     return false;
 }
 

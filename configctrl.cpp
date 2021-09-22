@@ -13,7 +13,7 @@ CConfigCtrl::CConfigCtrl()
         qDebug()<<"Config file not exist!";
         this->__CreateConfigFile();
     }
-    XLOG_DEBUG("Class CConfigCtrl Init");
+    XLOG_TRACE("Class CConfigCtrl Init");
 }
 
 bool CConfigCtrl::WriteInit(QString group, QString key, QString value)
@@ -55,14 +55,16 @@ QString CConfigCtrl::ReadInit(QString group, QString key) {
     if(group.isEmpty()||key.isEmpty()) return value;
     QSettings config(this->__initFilePath, QSettings::IniFormat);
     value = config.value(group+"/"+key).toString();
-    XLOG_DEBUG("Read Allegro Path");
+    XLOG_TRACE("Read Allegro Path {}", value.toStdString());
     return value;
 }
 
 QStringList CConfigDatabase::ReadDatabase() {
     QStringList res;
     for(int i = 0; i < __db_conf_key_list.count(); i++){
-        res << ReadInit(__db_conf_group, __db_conf_key_list[i]);
+        QString read_tmp = ReadInit(__db_conf_group, __db_conf_key_list[i]);
+        res << read_tmp;
+        XLOG_DEBUG("{}={}",__db_conf_key_list[i].toStdString(), read_tmp.toStdString());
     }
     return res;
 }

@@ -6,13 +6,6 @@
 
 int main(int argc, char *argv[])
 {
-    int param = 1;
-
-    XLOG_TRACE("this is trace log record, param: {}", ++param); // int type param is ok
-    XLOG_DEBUG("this is debug log record, param: {}", ++param);
-    XLOG_INFO("this is info log record, param: {}", ++param);
-    XLOG_WARN("this is warn log record, param: {}", double(++param)); // double type param is ok
-    XLOG_ERROR("this is error log record, param: {}", std::to_string(++param)); // string type param
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif

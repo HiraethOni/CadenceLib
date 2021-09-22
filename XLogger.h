@@ -99,8 +99,7 @@ private:
             const std::string logger_name = logger_name_prefix + std::to_string(date) + "_" + std::to_string(time);
 
             if (console)
-//                m_logger = spdlog::stdout_color_st(logger_name); // single thread console output faster
-                m_logger = spdlog::stdout_color_mt(logger_name); // single thread console output faster
+                m_logger = spdlog::stdout_color_st(logger_name); // single thread console output faster
             else
                 //m_logger = spdlog::create_async<spdlog::sinks::basic_file_sink_mt>(logger_name, log_dir + "/" + logger_name + ".log"); // only one log file
                 m_logger = spdlog::create_async<spdlog::sinks::rotating_file_sink_mt>(logger_name, log_dir + "/" + logger_name + ".log", 500 * 1024 * 1024, 1000); // multi part log files, with every part 500M, max 1000 files
