@@ -42,7 +42,6 @@ QStringList CDatabaseCtrl::getAllTablesNames() const {
 
 QString CDatabaseCtrl::getAllContent(const QString tables_name) const {
     __m_p_query->exec("Select * from " + tables_name);
-    QStringList str_list;
 
     // 返回的json前面加入一行空行,防止数据库是空的导致前端json解码失败
     // 同时也为了方便前端的表格新建这一功能的实现
