@@ -4,7 +4,6 @@
 #include <QSqlQuery>
 #include <QObject>
 
-#include "spdlog/spdlog.h"
 /**
  * 数据库查询组件,供QML调用
  */
