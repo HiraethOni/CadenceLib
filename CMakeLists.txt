@@ -27,7 +27,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools Sql REQUIRED)
 
-set(TS_FILES source/CadenceLibQML_zh_CN.ts)
+set(TS_FILES resource/CadenceLibQML_zh_CN.ts)
 
 set(PROJECT_SOURCES
         ${TS_FILES}
