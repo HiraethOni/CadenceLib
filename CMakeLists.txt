@@ -31,6 +31,7 @@ set(TS_FILES resource/CadenceLibQML_zh_CN.ts)
 
 set(PROJECT_SOURCES
         ${TS_FILES}
+        ./resource/qml.qrc
 )
 
 AUX_SOURCE_DIRECTORY(./src PROJECT_SOURCES)
