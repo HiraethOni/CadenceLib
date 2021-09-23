@@ -11,6 +11,9 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(PROJECT_VERSION_MAJOR 1.0.0)
+# 不翻译Qt文件, Qt Creator更新后这货耗费的时间太大
+# 而且还傻乎乎的不检查文件是否修改一股脑的翻译
+set(NO_CREATE_TS_FILE TRUE)
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.
@@ -74,7 +77,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES} ${HEADER_FILES}
     )
 
-    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+    if(!NO_CREATE_TS_FILE)
+        qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+    endif()
 else()
     if(ANDROID)
         add_library(CadenceLibQML SHARED
@@ -85,8 +90,9 @@ else()
           ${PROJECT_SOURCES}
         )
     endif()
-
-    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+    if(!NO_CREATE_TS_FILE)
+        qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+    endif()
 endif()
 
 target_compile_definitions(CadenceLibQML
