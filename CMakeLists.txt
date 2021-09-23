@@ -39,21 +39,27 @@ AUX_SOURCE_DIRECTORY(./src PROJECT_SOURCES)
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 include_directories("${PROJECT_SOURCE_DIR}/3rdparty/spdlog/include")
-add_library(spdlog_shared_lib SHARED "")
-target_include_directories(spdlog_shared_lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/spdlog/include)
-target_sources(spdlog_shared_lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/spdlog/include/spdlog/spdlog.h)
-set_target_properties(spdlog_shared_lib
-     PROPERTIES
-        # -fPIC 生成位置无关代码
-        POSITION_INDEPENDENT_CODE 1
-        # 设置库版本号为工程主版本号
-        SOVERSION ${PROJECT_VERSION_MAJOR}
-        # 修改输出文件名字
-        OUTPUT_NAME "spdlog_shared"
-        # 为Debug模式下生成的库添加后缀
-        DEBUG_POSTFIX "_d"
-        )
-target_compile_options(spdlog_shared_lib PRIVATE -std=c++11)
+if (CMAKE_BUILD_TYPE STREQUAL Debug)
+    set(spdlog_cxx spdlog)
+    add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty/spdlog)
+else()
+    set(spdlog_cxx spdlog_shared_lib)
+    add_library(spdlog_shared_lib SHARED "")
+    target_include_directories(spdlog_shared_lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/spdlog/include)
+    target_sources(spdlog_shared_lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/spdlog/include/spdlog/spdlog.h)
+    set_target_properties(spdlog_shared_lib
+         PROPERTIES
+            # -fPIC 生成位置无关代码
+            POSITION_INDEPENDENT_CODE 1
+            # 设置库版本号为工程主版本号
+            SOVERSION ${PROJECT_VERSION_MAJOR}
+            # 修改输出文件名字
+            OUTPUT_NAME "spdlog_shared"
+            # 为Debug模式下生成的库添加后缀
+            DEBUG_POSTFIX "_d"
+            )
+    target_compile_options(spdlog_shared_lib PRIVATE -std=c++11)
+endif()
 
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(-D_DEBUG)
@@ -86,4 +92,4 @@ endif()
 target_compile_definitions(CadenceLibQML
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(CadenceLibQML
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Sql PUBLIC spdlog_shared_lib)
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Sql ${spdlog_cxx})
