@@ -1,6 +1,7 @@
-import QtQuick 2.15
-import QtQuick.Window 2.15
-import QtQuick.Controls 2.15
+import QtQuick 2.12
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Controls.Material 2.12
 import Qt.labs.qmlmodels 1.0
 import com.hmqs.sqlqml 1.0
 
@@ -89,12 +90,10 @@ Window {
                     }
                 }
             }
-
             DelegateChoice {
                 column: 6
-                row: 0
-                delegate: ComboBox {
-                    editable: true
+//                row: 0
+                delegate: ComboBox{
                     model: packageList
                     currentIndex: indexOfValue(display)
                     }
@@ -127,6 +126,8 @@ Window {
 
     ComboBox {
         id: tables_box
+        width: save_btn.width
+        height: save_btn.height
         anchors.left: save_btn.right
         anchors.top: parent.top
         anchors.leftMargin: 0

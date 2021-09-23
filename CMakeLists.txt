@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.15)
 
 project(CadenceLibQML LANGUAGES CXX)
 
@@ -15,6 +15,15 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(-D_DEBUG)
     add_definitions(-DQT_QML_DEBUG)
 endif()
+
+set(QT_VERSION_MAJOR 5)
+if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+    set(CMAKE_PREFIX_PATH $ENV{QT62DIR})
+else()
+    set(CMAKE_PREFIX_PATH $ENV{QT1552DIR})
+endif()
+message("Qt Env Dir Path ${CMAKE_PREFIX_PATH}")
+message("Qt MAJOR ${QT_VERSION_MAJOR}")
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.

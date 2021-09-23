@@ -43,7 +43,7 @@ bool CConfigCtrl::__CreateConfigFile()
     file.setFileName(this->__initFilePath);
     if(file.open(QIODevice::WriteOnly)){
         QTextStream out(&file);
-        out.setCodec("UTF-8");
+        out.setEncoding(QStringConverter::Utf8);
         out<<this->__defaultConcig;
     }
     file.close();
