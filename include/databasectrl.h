@@ -29,11 +29,11 @@ public:
     Q_INVOKABLE QStringList getAllTablesNames() const;
 
     /**
-     * 获取表内Part Name值
+     * 获取数据库字段值
      * @param tables_name
      * @return
      */
-    Q_INVOKABLE QStringList getPartType(const QString tables_name) const;
+    Q_INVOKABLE QStringList getFiledValue(const QString field, const QString tables_name) const;
 
     /**
      * 获取数据库所有内容

@@ -32,7 +32,7 @@ Window {
             height: 50
             model: dbc.getAllTablesNames()
             onCurrentTextChanged: {
-                partType = dbc.getPartType(currentText)
+                partType = dbc.getFiledValue("Part Type",currentText)
             }
         }
 
