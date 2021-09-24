@@ -10,88 +10,92 @@ Window {
     width: 720
     height: 480
 
-    ScrollView {
+    Flow {
+        anchors.left: parent.left
+        anchors.right: parent.right
         anchors.fill: parent
-        Row {
-            spacing: 10
-            clip: true
-            id: row_ctrl
-            ComboBox {
-                id: table_class
-                editable: true
-                height: 50
-            }
-            Button {
-                id: add_btn
-                text: qsTr("Add")
-                height: table_class.height
-            }
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
+        anchors.topMargin: 5
 
-            TextField {
-                id: partNumber
-                height: table_class.height
-                placeholderText: qsTr("Part Number")
-            }
-            TextField {
-                id: description
-                height: table_class.height
-                placeholderText: qsTr("Description")
-            }
-            ComboBox {
-                id: part_type
-                editable: true
-                height: table_class.height
-            }
-            TextField {
-                id: _value
-                height: table_class.height
-                placeholderText: qsTr("Value")
-            }
-            TextField {
-                id: mfg_name
-                height: table_class.height
-                placeholderText: qsTr("MFG Name")
-            }
-            ComboBox {
-                id: pcb_footprint
-                editable: true
-                height: table_class.height
-            }
-            ComboBox {
-                id: symbol
-                editable: true
-                height: table_class.height
-            }
-            TextField {
-                id: mfg_part_name
-                height: table_class.height
-                placeholderText: qsTr("MFG Part Name")
-            }
-            TextField {
-                id: mfg_part_des
-                height: table_class.height
-                placeholderText: qsTr("MFG Part Description")
-            }
-            TextField {
-                id: roHS
-                height: table_class.height
-                placeholderText: qsTr("RoHS")
-            }
-            ComboBox {
-                id: mfg_part_lifeduty
-                height: table_class.height
-                model: ["Active", "Not For New Designs", "Obsolete"]
-            }
-            TextField {
-                id:datasheet
-                height: table_class.height
-                placeholderText: qsTr("Datasheet")
-            }
-            TextField {
-                id:buy_link
-                height: table_class.height
-                placeholderText: qsTr("Buy link")
-            }
+        spacing: 10
+
+        ComboBox {
+            id: table_class
+            editable: true
+            height: 50
+        }
+
+        Button {
+            id: add_btn
+            text: qsTr("Add")
+            height: table_class.height
+        }
+
+        TextField {
+            id: partNumber
+            height: table_class.height
+            placeholderText: qsTr("Part Number")
+        }
+        TextField {
+            id: description
+            height: table_class.height
+            placeholderText: qsTr("Description")
+        }
+        ComboBox {
+            id: part_type
+            editable: true
+            height: table_class.height
+        }
+        TextField {
+            id: _value
+            height: table_class.height
+            placeholderText: qsTr("Value")
+        }
+        TextField {
+            id: mfg_name
+            height: table_class.height
+            placeholderText: qsTr("MFG Name")
+        }
+        ComboBox {
+            id: pcb_footprint
+            editable: true
+            height: table_class.height
+        }
+        ComboBox {
+            id: symbol
+            editable: true
+            height: table_class.height
+        }
+        TextField {
+            id: mfg_part_name
+            height: table_class.height
+            placeholderText: qsTr("MFG Part Name")
+        }
+        TextField {
+            id: mfg_part_des
+            height: table_class.height
+            placeholderText: qsTr("MFG Part Description")
+        }
+        ComboBox {
+            id: roHS
+            height: table_class.height
+            model: ["YES", "NO", "Unsure"]
+        }
+        ComboBox {
+            id: mfg_part_lifeduty
+            height: table_class.height
+            model: ["Active", "Not For New Designs", "Obsolete"]
+        }
+        TextField {
+            id: datasheet
+            height: table_class.height
+            placeholderText: qsTr("Datasheet")
+        }
+        TextField {
+            id: buy_link
+            height: table_class.height
+            placeholderText: qsTr("Buy link")
         }
     }
 }
