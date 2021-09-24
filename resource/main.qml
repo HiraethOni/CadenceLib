@@ -15,6 +15,7 @@ Window {
         id: dbc
     }
     property var partType
+    property var symbolVar
 
     Flow {
         anchors.left: parent.left
@@ -32,6 +33,7 @@ Window {
             model: dbc.getAllTablesNames()
             onCurrentTextChanged: {
                 partType = dbc.getFiledValue("Part Type",currentText)
+                symbolVar = dbc.getFiledValue("Symbol", currentText)
             }
         }
 
@@ -71,11 +73,13 @@ Window {
             id: pcb_footprint
             editable: true
             height: table_class.height
+            model: dbc.scanPackageDir()
         }
         ComboBox {
             id: symbol
             editable: true
             height: table_class.height
+            model: symbolVar
         }
         TextField {
             id: mfg_part_name
