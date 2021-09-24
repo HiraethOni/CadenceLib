@@ -28,7 +28,6 @@ Window {
 
         ComboBox {
             id: table_class
-            editable: true
             height: 50
             model: dbc.getAllTablesNames()
             onCurrentTextChanged: {
