@@ -55,7 +55,7 @@ QString CConfigCtrl::ReadInit(QString group, QString key) {
     if(group.isEmpty()||key.isEmpty()) return value;
     QSettings config(this->__initFilePath, QSettings::IniFormat);
     value = config.value(group+"/"+key).toString();
-    XLOG_TRACE("Read Allegro Path {}", value.toStdString());
+    XLOG_TRACE("Read {}={}", group.toStdString(), value.toStdString());
     return value;
 }
 
@@ -64,7 +64,6 @@ QStringList CConfigDatabase::ReadDatabase() {
     for(int i = 0; i < __db_conf_key_list.count(); i++){
         QString read_tmp = ReadInit(__db_conf_group, __db_conf_key_list[i]);
         res << read_tmp;
-        XLOG_DEBUG("{}={}",__db_conf_key_list[i].toStdString(), read_tmp.toStdString());
     }
     return res;
 }
