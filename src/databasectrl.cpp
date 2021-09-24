@@ -86,3 +86,18 @@ QStringList CDatabaseCtrl::scanPackageDir() const {
 
     return fileNameList;
 }
+
+QStringList CDatabaseCtrl::getPartType(const QString tables_name) const {
+    XLOG_TRACE("Select `Part Type` from {}", tables_name.toStdString());
+    __m_p_query->exec("Select `Part Type` from " + tables_name);
+    QStringList partType;
+    while(__m_p_query->next()){
+        QString partTypeVale = __m_p_query->value(0).toString();
+        if (partType.contains(partTypeVale)) continue;
+        partType<<partTypeVale;
+#ifdef _DEBUG
+        XLOG_TRACE("SQL Ans:{}", partTypeVale.toStdString());
+#endif
+    }
+    return partType;
+}

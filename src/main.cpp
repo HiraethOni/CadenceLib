@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "XLogger.h"
+#include "databasectrl.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +11,7 @@ int main(int argc, char *argv[])
     XLOG_INFO("Hello World");
     QGuiApplication app(argc, argv);
 
+    qmlRegisterType<CDatabaseCtrl>("com.hmqs.sqlqml", 1,0,"DataBaseCtrl");
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

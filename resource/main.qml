@@ -2,13 +2,19 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Material 2.12
+import com.hmqs.sqlqml 1.0
 
 Window {
     visible: true
     title: qsTr("CadenceLib")
     id: root
-    width: 720
+    width: 530
     height: 480
+
+    DataBaseCtrl {
+        id: dbc
+    }
+    property var partType
 
     Flow {
         anchors.left: parent.left
@@ -24,6 +30,10 @@ Window {
             id: table_class
             editable: true
             height: 50
+            model: dbc.getAllTablesNames()
+            onCurrentTextChanged: {
+                partType = dbc.getPartType(currentText)
+            }
         }
 
         Button {
@@ -46,6 +56,7 @@ Window {
             id: part_type
             editable: true
             height: table_class.height
+            model: partType
         }
         TextField {
             id: _value
