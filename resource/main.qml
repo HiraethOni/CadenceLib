@@ -50,6 +50,7 @@ Window {
                 add_str.push(mfg_part_name.text, mfg_part_des.text)
                 add_str.push(roHS.currentText, mfg_part_lifeduty.currentText)
                 add_str.push(datasheet.text, buy_link.text)
+                dbc.insertData(table_class.currentText, add_str)
                 console.log(add_str)
             }
         }

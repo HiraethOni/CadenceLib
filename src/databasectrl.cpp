@@ -102,3 +102,29 @@ QStringList CDatabaseCtrl::getFiledValue(const QString field, const QString tabl
     }
     return partType;
 }
+
+bool CDatabaseCtrl::insertData(QString table_name, QStringList data) const {
+    __AddApostrophe(data);
+    QString insertValue = data.join(",");
+
+    QStringList tmp_insertField = __m_table_column_name;
+    tmp_insertField.removeFirst();
+    __AddBackticks(tmp_insertField);
+    QString insertFields = tmp_insertField.join(",");
+
+    QString sql_insert = "INSERT INTO " + table_name + " ( " + insertFields + " ) " + "VALUES" + " ( " + insertValue + " )";
+    XLOG_INFO("Insert query: {}", sql_insert.toStdString());
+    return false;
+}
+
+void CDatabaseCtrl::__AddBackticks(QStringList &str_list) {
+    for (int i = 0; i < str_list.count(); ++i) {
+        str_list[i] = "`" + str_list[i] + "`";
+    }
+}
+
+void CDatabaseCtrl::__AddApostrophe(QStringList &str_list) {
+    for (int i = 0; i <str_list.count(); ++i){
+        str_list[i] = "\'"+str_list[i]+"\'";
+    }
+}

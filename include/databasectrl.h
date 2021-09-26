@@ -47,6 +47,13 @@ public:
      * @return
      */
     Q_INVOKABLE QStringList scanPackageDir() const;
+
+    /**
+     * 插入数据
+     * @param data 待插入数据的列表,List
+     * @return 插入状态
+     */
+    Q_INVOKABLE bool insertData(QString table_name, QStringList data) const;
 //    Q_INVOKABLE void saveChanges(const QString json) const;
 
     /**
@@ -57,6 +64,9 @@ private:
     bool __ConnectDB();       // 连接数据库
     QSqlQuery *__m_p_query;     // 数据库查询指针
     QStringList __m_table_column_name;  // 数据库字段名
+
+    static inline void __AddBackticks(QStringList& str_list) ;
+    static inline void __AddApostrophe(QStringList& str_list) ;
 };
 
 #endif // DATABASECTRL_H
