@@ -41,6 +41,17 @@ Window {
             id: add_btn
             text: qsTr("Add")
             height: table_class.height
+            onClicked: {
+                var add_str = []
+                add_str.push(partNumber.text, description.text)
+                add_str.push(part_type.currentText)
+                add_str.push(_value.text, mfg_name.text)
+                add_str.push(pcb_footprint.currentText, symbol.currentText)
+                add_str.push(mfg_part_name.text, mfg_part_des.text)
+                add_str.push(roHS.currentText, mfg_part_lifeduty.currentText)
+                add_str.push(datasheet.text, buy_link.text)
+                console.log(add_str)
+            }
         }
 
         TextField {
@@ -58,6 +69,16 @@ Window {
             editable: true
             height: table_class.height
             model: partType
+            property bool firstEnter: true
+            onActiveFocusChanged: {
+                if(firstEnter){
+                    firstEnter = false
+                    editText = ""
+                } else {
+                    firstEnter = true
+                    editText = editText === "" ? currentText : editText
+                }
+            }
         }
         TextField {
             id: _value
@@ -74,12 +95,32 @@ Window {
             editable: true
             height: table_class.height
             model: dbc.scanPackageDir()
+            property bool firstEnter: true
+            onActiveFocusChanged: {
+                if(firstEnter){
+                    firstEnter = false
+                    editText = ""
+                } else {
+                    firstEnter = true
+                    editText = editText === "" ? currentText : editText
+                }
+            }
         }
         ComboBox {
             id: symbol
             editable: true
             height: table_class.height
             model: symbolVar
+            property bool firstEnter: true
+            onActiveFocusChanged: {
+                if(firstEnter){
+                    firstEnter = false
+                    editText = ""
+                } else {
+                    firstEnter = true
+                    editText = editText === "" ? currentText : editText
+                }
+            }
         }
         TextField {
             id: mfg_part_name
