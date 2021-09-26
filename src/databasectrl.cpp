@@ -104,11 +104,17 @@ QStringList CDatabaseCtrl::getFiledValue(const QString field, const QString tabl
 }
 
 bool CDatabaseCtrl::insertData(QString table_name, QStringList data) const {
+    /**
+     * @note 这里必须添加单引号,不然sql语句无法执行
+     */
     __AddApostrophe(data);
     QString insertValue = data.join(",");
 
     QStringList tmp_insertField = __m_table_column_name;
     tmp_insertField.removeFirst();
+    /**
+     * 这里添加反引号避免字段名内含有空格
+     */
     __AddBackticks(tmp_insertField);
     QString insertFields = tmp_insertField.join(",");
 

@@ -65,7 +65,15 @@ private:
     QSqlQuery *__m_p_query;     // 数据库查询指针
     QStringList __m_table_column_name;  // 数据库字段名
 
+    /**
+     * 给字符串列表里面的每一个值添加反引号
+     * @param str_list 字符串列表
+     */
     static inline void __AddBackticks(QStringList& str_list) ;
+    /**
+     * 给字符串列表的每一个值添加单引号
+     * @param str_list
+     */
     static inline void __AddApostrophe(QStringList& str_list) ;
 };
 
