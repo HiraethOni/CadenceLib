@@ -63,6 +63,11 @@ Window {
             id: description
             height: table_class.height
             placeholderText: qsTr("Description")
+            property var lastData: ""
+            onTextChanged: {
+                mfg_part_des.text = mfg_part_des.text === lastData ? text : mfg_part_des.text
+                lastData = text
+            }
         }
         ComboBox {
             id: part_type
