@@ -119,7 +119,7 @@ bool CDatabaseCtrl::insertData(QString table_name, QStringList data) const {
     __AddBackticks(tmp_insertField);
     QString insertFields = tmp_insertField.join(",");
 
-    QString sql_insert = "INSERT INTO " + table_name + " ( " + insertFields + " ) " + "VALUES" + " ( " + insertValue + " );";
+    QString sql_insert = QString("INSERT INTO %1 (%2) VALUES (%3)").arg(table_name).arg(insertFields).arg(insertValue);
     XLOG_INFO("Insert query: {}", sql_insert.toStdString());
     bool query_status = __m_p_query->exec(sql_insert);
 
