@@ -104,6 +104,7 @@ QStringList CDatabaseCtrl::getFiledValue(const QString field, const QString tabl
 }
 
 bool CDatabaseCtrl::insertData(QString table_name, QStringList data) const {
+    bool partNumber_isEmpty = data.first().isEmpty();
     /**
      * @note 这里必须添加单引号,不然sql语句无法执行
      */
@@ -118,9 +119,19 @@ bool CDatabaseCtrl::insertData(QString table_name, QStringList data) const {
     __AddBackticks(tmp_insertField);
     QString insertFields = tmp_insertField.join(",");
 
-    QString sql_insert = "INSERT INTO " + table_name + " ( " + insertFields + " ) " + "VALUES" + " ( " + insertValue + " )";
+    QString sql_insert = "INSERT INTO " + table_name + " ( " + insertFields + " ) " + "VALUES" + " ( " + insertValue + " );";
     XLOG_INFO("Insert query: {}", sql_insert.toStdString());
-    return false;
+    bool query_status = __m_p_query->exec(sql_insert);
+
+    if (partNumber_isEmpty && query_status) {
+        XLOG_TRACE("Not defined Part Number");
+        query_status = __m_p_query->exec("SELECT LAST_INSERT_ID();");
+        __m_p_query->next();
+        int id = __m_p_query->value(0).toInt();
+        XLOG_TRACE("Last insert id: {}", id);
+        query_status = __m_p_query->exec(QString("UPDATE %1 SET `Part Number`=%2 where id=%2").arg(table_name).arg(id));
+    }
+    return query_status;
 }
 
 void CDatabaseCtrl::__AddBackticks(QStringList &str_list) {

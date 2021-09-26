@@ -51,7 +51,7 @@ Window {
                 add_str.push(roHS.currentText, mfg_part_lifeduty.currentText)
                 add_str.push(datasheet.text, buy_link.text)
                 dbc.insertData(table_class.currentText, add_str)
-                console.log(add_str)
+//                console.log(add_str)
             }
         }
 
