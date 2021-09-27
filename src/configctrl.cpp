@@ -48,7 +48,6 @@ bool CConfigCtrl::__CreateConfigFile()
 #else
         out.setCodec("UTF-8");
 #endif
-        out.Code
         out<<this->__defaultConcig;
     }
     file.close();
