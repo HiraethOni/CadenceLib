@@ -56,24 +56,3 @@ jobs:
 #      构建
       - name: Build
         run: cmake --build '${{github.workspace}}'/build --target CadenceLibQML
-      - name: package
-#        if: startsWith(github.event.ref, 'refs/tags/')
-        env:
-          archiveName: "6.1.3-desktop-win64_mingw81"
-#          archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
-          targetName: "CadenceLibQML.exe"
-        shell: pwsh
-        run: |
-          # 创建文件夹
-          New-Item -ItemType Directory ${env:archiveName}
-          # 拷贝exe
-          Copy-Item build\${env:targetName} ${env:archiveName}\
-          # 拷贝依赖
-          windeployqt --qmldir . ${env:archiveName}\${env:targetName}
-          # 打包zip
-          Compress-Archive -Path ${env:archiveName} ${env:archiveName}'.zip'
-          # 记录环境变量packageName给后续step
-          $name = ${env:archiveName}
-          echo "::set-env name=packageName::$name"
-          # 打印环境变量packageName
-          Write-Host 'packageName:'${env:packageName}

@@ -2,6 +2,10 @@
 
 > 使用QML编写的OrCAD封装数据库管理工具
 
+## 构建
+
+**Windows** :![BuildStatus](https://github.com/HiraethOni/CadenceLib/workflows/Build/badge.svg)
+
 ## Feature
 
 - [x] 数据新增
