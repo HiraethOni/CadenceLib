@@ -10,7 +10,7 @@ CConfigCtrl::CConfigCtrl()
 {
     QFileInfo fileInfo(this->__initFilePath);
     if(!fileInfo.isFile()) {
-        qDebug()<<"Config file not exist!";
+        XLOG_INFO("Config file not exist!");
         this->__CreateConfigFile();
     }
     XLOG_TRACE("Class CConfigCtrl Init");
