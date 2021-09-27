@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>CadenceLibQML_zh_CN.ts</file>
     </qresource>
 </RCC>

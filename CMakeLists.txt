@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(PROJECT_VERSION_MAJOR 1.0.0)
 # 不翻译Qt文件, Qt Creator更新后这货耗费的时间太大
 # 而且还傻乎乎的不检查文件是否修改一股脑的翻译
-set(NO_CREATE_TS_FILE FALSE)
+set(CREATE_TS_FILE TRUE)
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.
@@ -44,7 +44,6 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 include_directories("${PROJECT_SOURCE_DIR}/3rdparty/spdlog/include")
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
     add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty/spdlog)
-    message("Add Share Library sada")
 else()
     add_library(spdlog_shared_lib SHARED "")
     target_include_directories(spdlog_shared_lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/spdlog/include)
@@ -92,7 +91,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES} ${HEADER_FILES}
     )
 
-    if(!NO_CREATE_TS_FILE)
+    if(${CREATE_TS_FILE})
+        message("Update TS File ${CMAKE_SOURCE_DIR}/${TS_FILES}")
         qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
     endif()
 else()
@@ -105,7 +105,7 @@ else()
           ${PROJECT_SOURCES}
         )
     endif()
-    if(!NO_CREATE_TS_FILE)
+    if(${CREATE_TS_FILE})
         qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
     endif()
 endif()
