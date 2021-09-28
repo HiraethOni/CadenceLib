@@ -16,6 +16,14 @@ Window {
     }
     property var partType
     property var symbolVar
+    ListModel {
+        id:partTypeModel
+        ListElement{text:"Demo"}
+    }
+    ListModel {
+        id:symbolVarModel
+        ListElement{text:"Demo"}
+    }
 
     Flow {
         anchors.left: parent.left
@@ -34,6 +42,13 @@ Window {
             onCurrentTextChanged: {
                 partType = dbc.getFiledValue("Part Type",currentText)
                 symbolVar = dbc.getFiledValue("Symbol", currentText)
+
+                partTypeModel.clear()
+                partType.forEach((item,index,array)=>{partTypeModel.append({text:item})})
+                symbolVarModel.clear()
+                symbolVar.forEach((item,index,array)=>{symbolVarModel.append({text:item})})
+                part_type.currentIndex = 0
+                symbol.currentIndex=0
             }
         }
 
@@ -74,8 +89,9 @@ Window {
             id: part_type
             editable: true
             height: table_class.height
-            model: partType
+            model: partTypeModel
             property bool firstEnter: true
+
             onActiveFocusChanged: {
                 if(firstEnter){
                     firstEnter = false
@@ -83,6 +99,12 @@ Window {
                 } else {
                     firstEnter = true
                     editText = editText === "" ? currentText : editText
+                    if (find(editText) === -1 && editText !== ""){
+//                      不加上这个临时变量的话,更新Model后editText随之刷新,无法获取正确的所索引
+                        var str = editText
+                        model.append({text: str})
+                        currentIndex = indexOfValue(str)
+                    }
                 }
             }
         }
@@ -116,7 +138,7 @@ Window {
             id: symbol
             editable: true
             height: table_class.height
-            model: symbolVar
+            model: symbolVarModel
             property bool firstEnter: true
             onActiveFocusChanged: {
                 if(firstEnter){
@@ -125,6 +147,12 @@ Window {
                 } else {
                     firstEnter = true
                     editText = editText === "" ? currentText : editText
+                    if (find(editText) === -1 && editText !== ""){
+//                      不加上这个临时变量的话,更新Model后editText随之刷新,无法获取正确的所索引
+                        var str = editText
+                        model.append({text: str})
+                        currentIndex = indexOfValue(str)
+                    }
                 }
             }
         }
